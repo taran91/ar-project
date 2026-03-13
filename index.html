@@ -1,31 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR Auto-Launch</title>
-    <script>
-        window.onload = function() {
-            const isAndroid = /android/i.test(navigator.userAgent);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AR Auto-Launch</title>
 
-            if (isAndroid) {
-                // Using the true direct GitHub Raw CDN link to prevent redirect crashes
-                const rawGlbUrl = "https://raw.githubusercontent.com/taran91/ar-project/main/model.glb";
-                const encodedGlbUrl = encodeURIComponent(rawGlbUrl);
-                
-                // Android Intent to auto-launch Scene Viewer in AR mode
-                const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedGlbUrl}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
-                
-                // Use replace so the user doesn't get stuck in a back-button loop
-                window.location.replace(intentUrl);
-            } else {
-                // Message for desktop users
-                document.body.innerHTML = "<h2 style='font-family: sans-serif; text-align: center; margin-top: 20%;'>Please scan the QR code with an Android phone.</h2>";
-            }
-        };
-    </script>
+<script>
+window.onload = function() {
+
+const isAndroid = /android/i.test(navigator.userAgent);
+
+if (isAndroid) {
+
+const rawGlbUrl = "https://taran91.github.io/ar-project/models/model.glb";
+const encodedGlbUrl = encodeURIComponent(rawGlbUrl);
+
+const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedGlbUrl}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+
+window.location.replace(intentUrl);
+
+} else {
+
+document.body.innerHTML = "<h2 style='font-family: sans-serif; text-align:center; margin-top:20%;'>Please scan the QR code with an Android phone.</h2>";
+
+}
+
+};
+</script>
 </head>
-<body style="background: #111; color: #fff;">
-    <p style="font-family: sans-serif; text-align: center; margin-top: 20%;">Loading AR...</p>
+
+<body style="background:#111; color:#fff;">
+<p style="font-family:sans-serif; text-align:center; margin-top:20%;">
+Loading AR...
+</p>
 </body>
 </html>
