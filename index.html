@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Launch AR</title>
+    <script>
+        window.onload = function() {
+            // Automatically grab the exact Vercel URL you are hosting on
+            const baseUrl = window.location.href.split('?')[0].replace('index.html', '').replace(/\/$/, '');
+            const glbUrl = `${baseUrl}/model.glb`;
+            const usdzUrl = `${baseUrl}/model.usdz`;
+
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            const isAndroid = /android/i.test(navigator.userAgent);
+
+            if (isIOS) {
+                // iOS: Link directly to the USDZ file
+                window.location.href = usdzUrl;
+            } else if (isAndroid) {
+                // Android: Use the Scene Viewer Intent
+                const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${glbUrl}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+                window.location.href = intentUrl;
+            } else {
+                document.body.innerHTML = "<h2 style='font-family: sans-serif; text-align: center; margin-top: 20%;'>Please scan the QR code with a mobile phone to view in AR.</h2>";
+            }
+        };
+    </script>
+</head>
+<body>
+    <p style="font-family: sans-serif; text-align: center; margin-top: 20%;">Loading AR experience...</p>
+</body>
+</html>
