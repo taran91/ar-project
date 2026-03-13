@@ -4,25 +4,18 @@
     <title>Launch AR</title>
     <script>
         window.onload = function() {
-            // Clean up the base URL
-            let baseUrl = window.location.href.split('?')[0].replace('index.html', '');
-            if (baseUrl.endsWith('/')) {
-                baseUrl = baseUrl.slice(0, -1);
-            }
-            
-            const glbUrl = `${baseUrl}/model.glb`;
-            const usdzUrl = `${baseUrl}/model.usdz`;
+            // Put your actual Vercel link here
+            const glbUrl = "https://YOUR-VERCEL-URL.vercel.app/model.glb";
+            const usdzUrl = "https://YOUR-VERCEL-URL.vercel.app/model.usdz";
 
             const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
             const isAndroid = /android/i.test(navigator.userAgent);
 
             if (isIOS) {
-                // iOS directly opens USDZ
                 window.location.href = usdzUrl;
             } else if (isAndroid) {
-                // Android MUST have the file URL safely encoded
-                const encodedGlbUrl = encodeURIComponent(glbUrl);
-                const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedGlbUrl}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+                // Notice we removed the encoding here! Just the raw glbUrl.
+                const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${glbUrl}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
                 window.location.href = intentUrl;
             } else {
                 document.body.innerHTML = "<h2 style='font-family: sans-serif; text-align: center; margin-top: 20%;'>Please scan the QR code with a mobile phone to view in AR.</h2>";
