@@ -1,9 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AR Auto-Launch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <script>
 window.onload = function() {
@@ -12,26 +10,27 @@ const isAndroid = /android/i.test(navigator.userAgent);
 
 if (isAndroid) {
 
-const rawGlbUrl = "https://taran91.github.io/ar-project/models/model.glb";
-const encodedGlbUrl = encodeURIComponent(rawGlbUrl);
+const modelUrl = "https://taran91.github.io/ar-project/models/model.glb";
 
-const intentUrl = `intent://arvr.google.com/scene-viewer/1.0?file=${encodedGlbUrl}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
+const intent = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(modelUrl)}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
 
-window.location.replace(intentUrl);
+window.location.replace(intent);
 
 } else {
 
-document.body.innerHTML = "<h2 style='font-family: sans-serif; text-align:center; margin-top:20%;'>Please scan the QR code with an Android phone.</h2>";
+document.body.innerHTML =
+"<h2 style='font-family:sans-serif;text-align:center;margin-top:20%'>Please scan with an Android phone</h2>";
 
 }
 
-};
+}
 </script>
+
 </head>
 
-<body style="background:#111; color:#fff;">
-<p style="font-family:sans-serif; text-align:center; margin-top:20%;">
-Loading AR...
+<body style="background:black;color:white;">
+<p style="text-align:center;margin-top:20%;font-family:sans-serif;">
+Launching AR...
 </p>
 </body>
 </html>
