@@ -1,36 +1,36 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tezor AR Model Viewer</title>
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.4.0/model-viewer.min.js"></script>
+    
+    <style>
+      body { margin: 0; padding: 0; background-color: #f4f4f4; }
+      /* Make the viewer take up the whole screen */
+      model-viewer {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
 
-<script>
-window.onload = function() {
+    <model-viewer 
+      src="1.glb" 
+      ar 
+      ar-modes="webxr scene-viewer quick-look" 
+      camera-controls 
+      tone-mapping="neutral" 
+      shadow-intensity="1">
+      
+      <button slot="ar-button" style="position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); padding: 10px 20px; font-size: 16px; border-radius: 8px; border: none; background-color: #007bff; color: white; box-shadow: 0px 4px 6px rgba(0,0,0,0.1); cursor: pointer;">
+        View in AR
+      </button>
 
-const isAndroid = /android/i.test(navigator.userAgent);
+    </model-viewer>
 
-if (isAndroid) {
-
-const modelUrl = "https://taran91.github.io/ar-project/models/model.glb";
-
-const intent = `intent://arvr.google.com/scene-viewer/1.0?file=${encodeURIComponent(modelUrl)}&mode=ar_only#Intent;scheme=https;package=com.google.ar.core;action=android.intent.action.VIEW;end;`;
-
-window.location.replace(intent);
-
-} else {
-
-document.body.innerHTML =
-"<h2 style='font-family:sans-serif;text-align:center;margin-top:20%'>Please scan with an Android phone</h2>";
-
-}
-
-}
-</script>
-
-</head>
-
-<body style="background:black;color:white;">
-<p style="text-align:center;margin-top:20%;font-family:sans-serif;">
-Launching AR...
-</p>
-</body>
+  </body>
 </html>
